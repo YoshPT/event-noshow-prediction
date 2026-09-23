@@ -19,7 +19,7 @@ The analysis is based on 9,179 anonymized registration records. Key variables in
 * `Lead Time`: Days between the registration date and the event date
 * `Time`: Frequency of past event attendance
 * `Company Size`: Number of employees in the registrant's organization
-* > 🔒 **Data Privacy Note:** The dataset used in this analysis is proprietary to the company. To comply with data privacy and confidentiality policies, the original data file has not been uploaded to this public repository. However, the R scripts, methodologies, and statistical outputs are fully documented to demonstrate the analytical process.
+> 🔒 **Data Privacy Note:** The dataset used in this analysis is proprietary to the company. To comply with data privacy and confidentiality policies, the original data file has not been uploaded to this public repository. However, the R scripts, methodologies, and statistical outputs are fully documented to demonstrate the analytical process.
 
 ## 💡 Key Findings & Behavioral Insights
 By translating statistical outputs (P-values and Odds Ratios) into human behavior, the study found:
