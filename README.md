@@ -16,7 +16,7 @@ This is my senior project in Economics, completed during my Data Analyst co-op i
 The analysis is based on 9,179 anonymized registration records. Key variables include:
 * `Status` (Target): 1 = No-show, 0 = Attended
 * `Country`: Domestic vs. international registrants
-* `Job`: Occupational level (e.g., C-Level, Procurement, Sales, Technical)
+* `Job`: Occupational level (e.g., Consultant, Executive, Marketing, Product Management, Procurement, Sales, and Technical & Education)
 * `Lead Time`: Days between the registration date and the event date
 * `Time`: Frequency of past event attendance
 * `Company Size`: Number of employees in the registrant's organization
@@ -46,12 +46,26 @@ Metrics are calculated at a 0.5 classification threshold on the full dataset (in
 * **Targeting value:** Among registrants flagged as no-shows, 55.6% did not attend, about 1.9 times the overall no-show rate. This suggests the model can help prioritize groups for follow-up, although it captures only about a quarter of all no-shows.
 
 ## 💡 Key Findings
-The results below describe statistical associations, not causal effects.
+Results are statistical associations, not causal effects. Exp(B) is the multiplicative change in the odds of a no-show. Variables are significant at the 0.01 level except where noted.
 
-1. **Lead time:** Each additional day between registration and the event is associated with about 2.8% higher odds of a no-show (Exp(B) = 1.028). Early registrants may need more engagement to stay committed.
-2. **Job level:** Decision-makers (C-Level, Procurement, Sales) have significantly lower odds of a no-show than technical or educational staff. One possible explanation is that they attend for business purposes, which this study did not test.
-3. **Past attendance:** Registrants with 2-3 past attendances have about 20% lower odds of a no-show (coefficient = -0.221, Exp(B) ≈ 0.80) compared with [reference group].
-4. **Company size:** Attendees from large enterprises (>500 employees) have lower odds of a no-show. This may reflect formal work assignments and reporting structures, which this study did not test.
+| Factor | B | S.E. | Exp(B) | Change in odds of no-show | p |
+|---|---|---|---|---|---|
+| Country: Thai vs. international | 0.171 | 0.056 | 1.186 | +18.6% | 0.002 |
+| Occupation: Consultant / Advisor (Job1) | 0.061 | 0.136 | 1.063 | +6.3% (not significant) | 0.653 |
+| Occupation: Executive / Senior Management (Job2) | -0.327 | 0.077 | 0.721 | -27.9% | < 0.001 |
+| Occupation: Marketing & Communications (Job3) | -0.316 | 0.093 | 0.729 | -27.1% | 0.001 |
+| Occupation: Product Management (Job4) | -0.306 | 0.115 | 0.736 | -26.4% | 0.008 |
+| Occupation: Procurement (Job5) | -0.372 | 0.108 | 0.690 | -31.0% | 0.001 |
+| Occupation: Sales & Business Development (Job6) | -0.471 | 0.073 | 0.624 | -37.6% | < 0.001 |
+| Lead time (per additional day) | 0.027 | 0.001 | 1.028 | +2.8% | < 0.001 |
+| Past attendance: 2-3 times vs. never | -0.221 | 0.050 | 0.802 | -19.8% | < 0.001 |
+| Company size: >500 vs. <500 employees | -0.247 | 0.075 | 0.781 | -21.9% | 0.001 |
+
+Model: N = 9,179, -2 Log Likelihood = 10,160.857, Cox & Snell R² = 0.092, Nagelkerke R² = 0.132.
+
+Occupations are compared with Occupation: Technician and Education.
+* **Higher odds of a no-show:** longer lead time and Thai registrants.
+* **Lower odds of a no-show:** five of the six occupation categories, prior attendance, and larger companies. Consultant / Advisor did not differ significantly from the reference group.
 
 ## 🚀 Proposed Business Use Cases
 Based on these findings, the following ideas are proposed for future platform development:
@@ -64,6 +78,6 @@ Based on these findings, the following ideas are proposed for future platform de
 * **Moderate predictive performance:** The Nagelkerke R² of 0.132 and AUC of 0.70 indicate that the model explains a limited share of no-show behavior. Its main contribution is identifying associated factors, not individual-level prediction.
 * **In-sample evaluation:** All metrics were calculated on the data used to fit the model and may be optimistic. Validation on unseen data (e.g., a hold-out set or cross-validation) is needed before practical use.
 * **Association, not causation:** The data is observational, so the findings show statistical associations, not causal effects.
-* **Limited generalizability:** The model is based on 9,179 records from [a single platform's events]. Results may differ for other organizers or event types.
+* **Limited generalizability:** The model is based on 9,179 records from a single event. Results may differ for other organizers or event types.
 ---
 *Developed as an internship Proof-of-Concept project by Poomrat Thanapasee | Connect with me on [LinkedIn](https://www.linkedin.com/in/poomrat-thanapasee-6a99443b3/)*
