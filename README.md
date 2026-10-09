@@ -80,4 +80,4 @@ Based on these findings, the following ideas are proposed for future platform de
 * **Association, not causation:** The data is observational, so the findings show statistical associations, not causal effects.
 * **Limited generalizability:** The model is based on 9,179 records from a single event. Results may differ for other organizers or event types.
 ---
-*Developed as an internship Proof-of-Concept project by Poomrat Thanapasee | Connect with me on [LinkedIn](https://www.linkedin.com/in/poomrat-thanapasee-6a99443b3/)*
+*Developed as an senior project by Poomrat Thanapasee | Connect with me on [LinkedIn](https://www.linkedin.com/in/poomrat-thanapasee-6a99443b3/)*
