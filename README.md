@@ -1,4 +1,4 @@
-# 📊  Predicting Registration No-Shows with Logistic Regression
+# 📊  Analyzing Factors Influencing Registration No-Shows using Logistic Regression
 
 **An exploratory study of the behavioral drivers of event no-shows**
 
