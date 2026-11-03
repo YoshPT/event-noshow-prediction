@@ -15,15 +15,8 @@ library(pROC)
 library(DescTools)
 
 # --- Step 2: Import data ---
-# Real data (proprietary, not in this repository): data/registrations.csv
-# If it is missing, fall back to the synthetic demo data from
-# R/generate_synthetic_data.R (results are NOT real findings).
-if (file.exists("data/registrations.csv")) {
-  data <- read.csv("data/registrations.csv", header = TRUE)
-} else {
-  message("Real data not found: using SYNTHETIC data (demo only).")
-  data <- read.csv("data/synthetic_registrations.csv", header = TRUE)
-}
+# Data: Register_DB.csv (proprietary; not included in this repository)
+data <- read.csv(file.choose(), header = TRUE)   # choose Register_DB.csv
 head(data)
 table(data$TIME_ATTEND)   # sanity check: should show only 0 and 1
 
