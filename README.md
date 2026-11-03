@@ -1,19 +1,19 @@
-# 📊  Analyzing Factors Influencing Registration No-Shows using Logistic Regression
+# 📊 Analyzing Factors Influencing Registration No-Shows using Logistic Regression
 
 **An exploratory study of the behavioral drivers of event no-shows**
 
 ## 🎯 Project Overview
-This is my senior project in Economics, completed during my Data Analyst co-op internship at a Thai event-industry company. It applies Logistic Regression, an econometric approach, to identify the factors associated with event no-shows. The goal is to provide statistical evidence that can inform future features for event management platforms, such as risk-based reminders. The findings and recommendations were documented in a written report.
+This is my senior project in Economics, completed during my Data Analyst co-op internship at a Thai event-industry company. It applies Logistic Regression, an econometric approach, to identify the factors associated with event no-shows. The goal is to provide statistical evidence that can inform future features for event management platforms, such as risk-based reminders. The findings and recommendations were documented in a written report, which is available upon request.
 
 ## 🛠️ Technical Stack & Methodology
 * **Language:** R (RStudio)
 * **Model:** Binary Logistic Regression (target: no-show)
-* **Model Fit:** Nagelkerke R² of 0.132, AUC of 0.70 (see Model Performance)
 * **Inference:** p-values, Wald Chi-Square, and odds ratios (Exp(B)) with 95% profile-likelihood confidence intervals
-* **Diagnostics:** Generalized VIF (Job has six dummy variables). All GVIF^(1/(2·Df)) values are at most 1.04, below the 2.24 threshold (equivalent to VIF < 5), so multicollinearity is not a concern.
+* **Diagnostics:** Multicollinearity check using Generalized VIF (Job has six dummy variables), compared against the 2.24 threshold (equivalent to VIF < 5)
+* **Evaluation:** AUC, Nagelkerke R², and a confusion matrix at a 0.5 classification threshold (in-sample)
 
 ## 📋 Data Attributes
-The analysis is based on 9,179 anonymized registration records. Variables and their coding:
+The analysis is based on anonymized registration records. Variables and their coding:
 
 | Variable | Coding |
 |---|---|
@@ -25,85 +25,20 @@ The analysis is based on 9,179 anonymized registration records. Variables and th
 | `Company Size` | 1 = more than 500 employees, 0 = 500 or fewer |
 
 > 🔒 **Data Privacy Note:**
-> The dataset used in this analysis is proprietary to the company. To comply with data privacy and confidentiality policies, the original data file has not been uploaded to this public repository. However, the R scripts, methodologies, and statistical outputs are fully documented to demonstrate the analytical process.
+> The dataset used in this analysis is proprietary to the company. To comply with data privacy and confidentiality policies, the original data file and the numerical results have not been published in this public repository. The R scripts and methodology are documented to demonstrate the analytical process.
 
-## 📈 Model Performance
-Metrics are calculated at a 0.5 classification threshold on the full dataset (in-sample).
+## 🔍 Approach
+1. Define the outcome (no-show vs. attended) and the explanatory variables listed above.
+2. Fit a binary logistic regression and check multicollinearity with Generalized VIF.
+3. Interpret coefficients as odds ratios with profile-likelihood confidence intervals.
+4. Evaluate fit and discrimination in-sample, and treat the results as associations rather than causal effects.
 
-| Metric | Value |
-|---|---|
-| Overall accuracy | 72.4% |
-| Majority-class baseline | 71.0% |
-| AUC | 0.70 |
-| Nagelkerke R² | 0.132 |
-| No-show recall | 23.1% |
-| No-show precision | 55.6% |
-
-| | Predicted: Attended | Predicted: No-show |
-|---|---|---|
-| **Actual: Attended** | 6,030 | 491 |
-| **Actual: No-show** | 2,044 | 614 |
-
-* **Accuracy vs. baseline:** Accuracy is only 1.4 percentage points above the baseline because no-shows are the minority class (29.0%) and the model rarely predicts them at this threshold, so accuracy alone is not informative here. The AUC and the precision of the flagged group describe the model more usefully.
-* **Discrimination:** An AUC of 0.70 means a randomly chosen no-show receives a higher predicted probability than a randomly chosen attendee about 70% of the time.
-* **Targeting value:** Among registrants flagged as no-shows, 55.6% did not attend, about 1.9 times the overall no-show rate. This suggests the model can help prioritize groups for follow-up, although it captures only 23.1% of all no-shows.
-
-## 💡 Key Findings
-Results are statistical associations, not causal effects. Occupations are compared with the reference group Technical Roles.
-
-* **Lead time is the most statistically significant factor** (Wald χ² = 763.6): each extra day raises the odds of a no-show by 2.8%, so registering 30 days earlier corresponds to roughly 2.3× the odds (exp(0.0274 × 30)), assuming a linear effect on the log-odds.
-* **Thai registrants** have 17.6% higher odds of a no-show than international ones.
-* **Lower odds of a no-show:** returning attendees (2-3 times, -19.7%), larger companies (-21.8%), and five of the six occupation groups, led by Sales & Business Development (-37.5%).
-* **Consultant / Advisor** did not differ significantly from the reference group.
-
-| Factor | Exp(B) | 95% CI | Change in odds | p |
-|---|---|---|---|---|
-| Lead time (per day) | 1.028 | 1.026-1.030 | +2.8% | < 0.001 |
-| Country: Thai vs. international | 1.176 | 1.058-1.309 | +17.6% | 0.003 |
-| Past attendance: 2-3 times vs. first-time | 0.803 | 0.728-0.885 | -19.7% | < 0.001 |
-| Company size: >500 vs. 500 or fewer | 0.782 | 0.674-0.905 | -21.8% | 0.001 |
-| Executive / C-level | 0.725 | 0.625-0.842 | -27.5% | < 0.001 |
-| Marketing & Communications | 0.727 | 0.606-0.871 | -27.3% | 0.001 |
-| Product Management | 0.736 | 0.587-0.920 | -26.4% | 0.008 |
-| Purchasing / Procurement | 0.688 | 0.557-0.848 | -31.2% | 0.001 |
-| Sales & Business Development | 0.625 | 0.541-0.722 | -37.5% | < 0.001 |
-| Consultant / Advisor | 1.065 | 0.815-1.387 | +6.5% (not significant) | 0.641 |
-
-<details>
-<summary>Full regression output (B, S.E., Wald χ²)</summary>
-
-| Factor | B | S.E. | Wald χ² | Exp(B) | 95% CI for Exp(B) | Change in odds of no-show | p |
-|---|---|---|---|---|---|---|---|
-| Country: Thai vs. international | 0.1622 | 0.0543 | 8.918 | 1.176 | 1.058-1.309 | +17.6% | 0.003 |
-| Occupation: Consultant / Advisor (Job1) | 0.0633 | 0.1358 | 0.217 | 1.065 | 0.815-1.387 | +6.5% (not significant) | 0.641 |
-| Occupation: Executive / C-level (Job2) | -0.3213 | 0.0761 | 17.816 | 0.725 | 0.625-0.842 | -27.5% | < 0.001 |
-| Occupation: Marketing & Communications (Job3) | -0.3186 | 0.0925 | 11.875 | 0.727 | 0.606-0.871 | -27.3% | 0.001 |
-| Occupation: Product Management (Job4) | -0.3062 | 0.1147 | 7.124 | 0.736 | 0.587-0.920 | -26.4% | 0.008 |
-| Occupation: Purchasing / Procurement (Job5) | -0.3737 | 0.1075 | 12.086 | 0.688 | 0.557-0.848 | -31.2% | 0.001 |
-| Occupation: Sales & Business Development (Job6) | -0.4696 | 0.0734 | 40.906 | 0.625 | 0.541-0.722 | -37.5% | < 0.001 |
-| Lead time (per additional day) | 0.0274 | 0.0010 | 763.562 | 1.028 | 1.026-1.030 | +2.8% | < 0.001 |
-| Past attendance: 2-3 times vs. first-time | -0.2197 | 0.0499 | 19.386 | 0.803 | 0.728-0.885 | -19.7% | < 0.001 |
-| Company size: >500 vs. 500 or fewer | -0.2457 | 0.0750 | 10.738 | 0.782 | 0.674-0.905 | -21.8% | 0.001 |
-
-Model: N = 9,179, -2 Log Likelihood = 10,160.857, Cox & Snell R² = 0.092, Nagelkerke R² = 0.132. Joint Wald test for Job (df = 6): χ² = 50.43, p < 0.001.
-
-
-</details>
-
-## 🚀 Proposed Business Use Cases
-Based on these findings, the following ideas are proposed for future platform development:
-* **Smart reminders:** Trigger targeted email/SMS reminders for higher-risk segments, such as early registrants (the exact threshold would need to be validated).
-* **Risk-based overbooking:** Suggest an overbooking quota to organizers based on the risk profile of the current registration pool (the rate would need to be estimated from historical data).
-
-**Other ideas (not directly derived from the model results):**
-* **Returning-attendee segments:** Flag returning attendees to offer perks such as fast-track check-in.
-* **On-site resource planning:** Use expected attendance to plan on-site staffing and check-in hardware.
+Results and the written report are available upon request.
 
 ## ⚠️ Limitations
-* **Moderate predictive performance:** The Nagelkerke R² of 0.132 and AUC of 0.70 indicate that the model explains a limited share of no-show behavior. Its main contribution is identifying associated factors, not individual-level prediction.
-* **In-sample evaluation:** All metrics were calculated on the data used to fit the model and may be optimistic. Validation on unseen data (e.g., a hold-out set or cross-validation) is needed before practical use.
+* **In-sample evaluation:** Metrics were calculated on the data used to fit the model and may be optimistic. Validation on unseen data (e.g., a hold-out set or cross-validation) is needed before practical use.
 * **Association, not causation:** The data is observational, so the findings show statistical associations, not causal effects.
-* **Limited generalizability:** The model is based on 9,179 records from a single event. Results may differ for other organizers or event types.
+* **Limited generalizability:** The model is based on registration records from a single event. Results may differ for other organizers or event types.
 
 ---
 *Developed as an senior project by Poomrat Thanapasee | Connect with me on [LinkedIn](https://www.linkedin.com/in/poomrat-thanapasee-6a99443b3/)*
