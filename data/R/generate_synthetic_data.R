@@ -27,10 +27,10 @@ df <- data.frame(
 job_eff <- c(0, -0.30, -0.20, -0.10, -0.25, -0.15, -0.05)
 names(job_eff) <- jobs
 
-eta <- -1.2 +
-  0.17   * df$COUNTRY +
+eta <- -1.0 +
+  0.10   * df$COUNTRY +
   job_eff[as.character(df$JOB)] +
-  0.0276 * df$LEADTIME -
+  0.02   * df$LEADTIME -
   0.80   * df$TIME_ATTEND -
   0.30   * df$COMPANYSIZE
 
