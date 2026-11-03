@@ -7,8 +7,6 @@
 ![AUC](https://img.shields.io/badge/AUC-0.70%20(in--sample)-orange)
 ![Data](https://img.shields.io/badge/Data-Proprietary%20(not%20published)-lightgrey)
 
----
-
 ## 📑 Table of Contents
 
 - [Project Overview](#-project-overview)
@@ -20,8 +18,6 @@
 - [How to Use the Script](#-how-to-use-the-script)
 - [Limitations](#-limitations)
 
----
-
 ## 🎯 Project Overview
 
 This is my **senior project in Economics**, completed during my **Data Analyst co-op internship** at a Thai event-industry company.
@@ -29,8 +25,6 @@ This is my **senior project in Economics**, completed during my **Data Analyst c
 It applies **Logistic Regression**, an econometric approach, to identify the factors associated with event no-shows. The goal is to provide statistical evidence that can inform future features for event management platforms, such as **risk-based reminders**.
 
 The findings and recommendations were documented in a written report for the co-op program.
-
----
 
 ## 🔧 Technical Stack & Methodology
 
@@ -41,8 +35,6 @@ The findings and recommendations were documented in a written report for the co-
 | **Inference** | p-values, Wald Chi-Square, and odds ratios (Exp(B)) with 95% profile-likelihood confidence intervals |
 | **Diagnostics** | Multicollinearity check using Generalized VIF (Job has six dummy variables), compared against the 2.24 threshold (equivalent to VIF < 5) |
 | **Evaluation** | AUC, Nagelkerke R², and a confusion matrix at a 0.5 classification threshold (in-sample) |
-
----
 
 ## 📋 Data Attributes
 
@@ -71,16 +63,12 @@ The findings and recommendations were documented in a written report for the co-
 | `Job6` | Sales & Business Development |
 | *(reference)* | Technical Roles |
 
----
-
 ## 🔍 Approach
 
 1. **Define** the outcome (no-show vs. attended) and the explanatory variables listed above.
 2. **Fit** a binary logistic regression and check multicollinearity with Generalized VIF.
 3. **Interpret** coefficients as odds ratios with profile-likelihood confidence intervals.
 4. **Evaluate** fit and discrimination in-sample, and treat the results as associations rather than causal effects.
-
----
 
 ## 📈 Model Performance
 
@@ -90,8 +78,6 @@ The findings and recommendations were documented in a written report for the co-
 
 > [!NOTE]
 > This is an in-sample figure. See [Limitations](#-limitations).
-
----
 
 ## 🔒 Data Availability
 
@@ -103,8 +89,6 @@ The dataset (event-registration records) is **proprietary to the company** where
 
 The analysis code is in [`Prediction_NoShow.R`](Prediction_NoShow.R). It is shared to document the method. Since the dataset is not published, the script cannot be run as-is.
 
----
-
 ## 🚀 How to Use the Script
 
 If you have your own data with the columns listed in [Data Attributes](#-data-attributes):
@@ -112,8 +96,6 @@ If you have your own data with the columns listed in [Data Attributes](#-data-at
 1. Open `Prediction_NoShow.R` in **RStudio**.
 2. Run the script.
 3. Select your **CSV file** when prompted.
-
----
 
 ## 🚧 Limitations
 
