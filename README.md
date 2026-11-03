@@ -67,15 +67,13 @@ Main findings (associations, holding other variables constant):
 The real data cannot be shared, so this repo includes a synthetic dataset generator with the same structure. In RStudio, set the working directory to the repo root and run:
 
 ```r
-source("R/generate_synthetic_data.R")
+source("R/generate_synthetic_data.R")   # creates data/synthetic_registrations.csv
+source("Prediction_NoShow.R")           # full analysis pipeline on the synthetic data
 ```
 
-This creates `data/synthetic_registrations.csv` and fits the same logistic regression specification, printing the odds ratios, to show that the pipeline runs end-to-end.
-
-`Prediction_NoShow.R` is the original analysis script. It requires the proprietary dataset, so it cannot be run without it.
+`Prediction_NoShow.R` uses `data/registrations.csv` when it exists and otherwise falls back to the synthetic data.
 
 > ⚠️ The synthetic data uses made-up, illustrative effects. It only demonstrates that the code runs. **It does not reproduce the findings in [Key Results](#-key-results).**
-
 
 ## 📁 Repository Structure
 ```
