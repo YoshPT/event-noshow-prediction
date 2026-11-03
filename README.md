@@ -77,11 +77,11 @@ source("Prediction_NoShow.R")           # full analysis pipeline on the syntheti
 
 ## 📁 Repository Structure
 ```
+├── Prediction_NoShow.R             # original analysis (requires proprietary data)
 ├── R/
-│   ├── analysis.R                  # main analysis (logistic regression)
-│   └── generate_synthetic_data.R   # synthetic data for testing the code
+│   └── generate_synthetic_data.R   # synthetic data + demo model fit
 ├── data/
-│   └── README.md                   # expected data format (real data not included)
+│   └── README.md                   # data format (real data not included)
 ├── .gitignore                      # keeps proprietary data out of the repo
 └── README.md
 ```
