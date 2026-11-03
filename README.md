@@ -3,7 +3,9 @@
 **An exploratory study of the behavioral drivers of event no-shows**
 
 ## 🎯 Project Overview
-This is my senior project in Economics, completed during my Data Analyst co-op internship at a Thai event-industry company. It applies Logistic Regression, an econometric approach, to identify the factors associated with event no-shows. The goal is to provide statistical evidence that can inform future features for event management platforms, such as risk-based reminders. The findings and recommendations were documented in a written report, which is available upon request.
+This is my senior project in Economics, completed during my Data Analyst co-op internship at a Thai event-industry company. It applies Logistic Regression, an econometric approach, to identify the factors associated with event no-shows. The goal is to provide statistical evidence that can inform future features for event management platforms, such as risk-based reminders. The findings and recommendations were documented in a written report for the co-op program.
+
+> 📌 **Scope of this repository:** it shows the methodology and the code. The data and the study's results are intentionally **not published** here.
 
 ## 🛠️ Technical Stack & Methodology
 * **Language:** R (RStudio)
@@ -13,17 +15,17 @@ This is my senior project in Economics, completed during my Data Analyst co-op i
 * **Evaluation:** AUC, Nagelkerke R², and a confusion matrix at a 0.5 classification threshold (in-sample)
 
 ## 🔒 Data Availability & Privacy Note
-The dataset (9,179 event-registration records) is **proprietary to the company** where I completed my co-op internship. Records were anonymized before analysis, and the raw data is **not published** in this repository.
+The dataset (event-registration records) is **proprietary to the company** where I completed my co-op internship. Records were anonymized before analysis, and the raw data is **not published** in this repository. For the same reason, the study's results are not published here.
 
-To make the work verifiable without the raw data, this repo provides:
+To make the method verifiable without the raw data, this repo provides:
 
 * the **data dictionary** below, describing every variable and its coding
-* the **R analysis code** and the headline results (see [Key Results](#-key-results))
+* the **R analysis code**
 * a **synthetic dataset generator** (`R/generate_synthetic_data.R`) with the same structure, so the code can be run end-to-end
 
-Questions about the data? Contact me on [LinkedIn](https://www.linkedin.com/in/poomrat-thanapasee-6a99443b3/).
+Questions about the project? Contact me on [LinkedIn](https://www.linkedin.com/in/poomrat-thanapasee-6a99443b3/).
 
-## 📋 Data Dictionary
+## 📋 Data Attributes
 Variables and their coding (column names used in the code, with the names used in the written report):
 
 | Column | Name in report | Coding |
@@ -41,23 +43,6 @@ Variables and their coding (column names used in the code, with the names used i
 3. Interpret coefficients as odds ratios with profile-likelihood confidence intervals.
 4. Evaluate fit and discrimination in-sample, and treat the results as associations rather than causal effects.
 
-The full written report is available upon request.
-
-## 📈 Key Results
-
-| Metric (in-sample, 0.5 threshold) | Value |
-|---|---|
-| AUC | 0.70 |
-| Nagelkerke R² | 0.132 |
-| Accuracy | 72.4% (baseline: 71.0%) |
-
-Main findings (associations, holding other variables constant):
-* **Lead time:** each additional day between registration and the event raises the odds of a no-show by about 2.8%.
-* **Country:** domestic (Thai) registrants have about 17.6% higher odds of a no-show than international registrants.
-* **Job:** most job groups have lower odds of a no-show than the Technical Roles reference group.
-* **Company size:** registrants from larger companies (more than 500 employees) have lower odds of a no-show.
-* **Past attendance:** returning attendees have lower odds of a no-show than first-time attendees.
-
 ## ⚠️ Limitations
 * **In-sample evaluation:** Metrics were calculated on the data used to fit the model and may be optimistic. Validation on unseen data (e.g., a hold-out set or cross-validation) is needed before practical use.
 * **Association, not causation:** The data is observational, so the findings show statistical associations, not causal effects.
@@ -73,7 +58,7 @@ source("Prediction_NoShow.R")           # full analysis pipeline on the syntheti
 
 `Prediction_NoShow.R` uses `data/registrations.csv` when it exists and otherwise falls back to the synthetic data.
 
-> ⚠️ The synthetic data uses made-up, illustrative effects. It only demonstrates that the code runs. **It does not reproduce the findings in [Key Results](#-key-results).**
+> ⚠️ The synthetic data uses made-up, illustrative effects. It only demonstrates that the code runs. **It does not reproduce the results of the original study.**
 
 ## 📁 Repository Structure
 ```
