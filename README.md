@@ -12,13 +12,13 @@
 ## 📑 Table of Contents
 
 - [Project Overview](#-project-overview)
-- [Technical Stack & Methodology](#️-technical-stack--methodology)
+- [Technical Stack & Methodology](#-technical-stack--methodology)
 - [Data Attributes](#-data-attributes)
 - [Approach](#-approach)
 - [Model Performance](#-model-performance)
 - [Data Availability](#-data-availability)
 - [How to Use the Script](#-how-to-use-the-script)
-- [Limitations](#️-limitations)
+- [Limitations](#-limitations)
 
 ---
 
@@ -32,7 +32,7 @@ The findings and recommendations were documented in a written report for the co-
 
 ---
 
-## 🛠️ Technical Stack & Methodology
+## 🔧 Technical Stack & Methodology
 
 | Area | Details |
 |---|---|
@@ -89,7 +89,7 @@ The findings and recommendations were documented in a written report for the co-
 | **AUC** (in-sample) | **0.70**, i.e., moderate ability to distinguish no-shows from attendees |
 
 > [!NOTE]
-> This is an in-sample figure. See [Limitations](#️-limitations).
+> This is an in-sample figure. See [Limitations](#-limitations).
 
 ---
 
@@ -105,7 +105,7 @@ The analysis code is in [`Prediction_NoShow.R`](Prediction_NoShow.R). It is shar
 
 ---
 
-## ▶️ How to Use the Script
+## 🚀 How to Use the Script
 
 If you have your own data with the columns listed in [Data Attributes](#-data-attributes):
 
@@ -115,7 +115,7 @@ If you have your own data with the columns listed in [Data Attributes](#-data-at
 
 ---
 
-## ⚠️ Limitations
+## 🚧 Limitations
 
 > [!WARNING]
 > Please read these before drawing any practical conclusions from the results.
