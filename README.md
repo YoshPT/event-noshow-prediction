@@ -12,20 +12,28 @@ This is my senior project in Economics, completed during my Data Analyst co-op i
 * **Diagnostics:** Multicollinearity check using Generalized VIF (Job has six dummy variables), compared against the 2.24 threshold (equivalent to VIF < 5)
 * **Evaluation:** AUC, Nagelkerke R², and a confusion matrix at a 0.5 classification threshold (in-sample)
 
+## 🔒 Data Availability & Privacy Note
+The dataset (9,179 event-registration records) is **proprietary to the company** where I completed my co-op internship. Records were anonymized before analysis, and the raw data is **not published** in this repository.
+
+To make the work verifiable without the raw data, this repo provides:
+
+* the **data dictionary** below, describing every variable and its coding
+* the **R analysis code** and the headline results (see [Key Results](#-key-results))
+* a **synthetic dataset generator** (`R/generate_synthetic_data.R`) with the same structure, so the code can be run end-to-end
+
+Questions about the data? Contact me on [LinkedIn](https://www.linkedin.com/in/poomrat-thanapasee-6a99443b3/).
+
 ## 📋 Data Attributes
-The analysis is based on anonymized registration records. Variables and their coding:
+Variables and their coding (column names used in the code, with the names used in the written report):
 
-| Variable | Coding |
-|---|---|
-| `Status` (Target) | 1 = No-show, 0 = Attended |
-| `Country` | 1 = Domestic (Thai), 0 = International |
-| `Job` | Six dummy variables: Job1 = Consultant / Advisor, Job2 = Executive / C-level, Job3 = Marketing & Communications, Job4 = Product Management, Job5 = Purchasing / Procurement, Job6 = Sales & Business Development. Reference group (all dummies = 0): Technical Roles |
-| `Lead Time` | Days between registration date and event date (Event Date − Registration Date) |
-| `Time` (past attendance) | 1 = returning attendee (2-3 times), 0 = first-time attendee |
-| `Company Size` | 1 = more than 500 employees, 0 = 500 or fewer |
-
-> 🔒 **Data Privacy Note:**
-> The dataset used in this analysis is proprietary to the company. To comply with data privacy and confidentiality policies, the original data file and the numerical results have not been published in this public repository. The R scripts and methodology are documented to demonstrate the analytical process.
+| Column | Name in report | Coding |
+|---|---|---|
+| `STATUS` (target) | Status | 1 = No-show, 0 = Attended |
+| `COUNTRY` | Country | 1 = Domestic (Thai), 0 = International |
+| `JOB` | Job1–Job6 | 7 groups. In the report, six dummy variables: Job1 = Consultant / Advisor, Job2 = Executive / C-level, Job3 = Marketing & Communications, Job4 = Product Management, Job5 = Purchasing / Procurement, Job6 = Sales & Business Development. Reference group (all dummies = 0): Technical Roles |
+| `LEADTIME` | Lead Time | Days between registration date and event date (Event Date − Registration Date) |
+| `TIME_ATTEND` | Time (past attendance) | 1 = returning attendee (attended this event 2-3 times), 0 = first-time attendee |
+| `COMPANYSIZE` | Company Size | 1 = more than 500 employees, 0 = 500 or fewer |
 
 ## 🔍 Approach
 1. Define the outcome (no-show vs. attended) and the explanatory variables listed above.
@@ -33,12 +41,49 @@ The analysis is based on anonymized registration records. Variables and their co
 3. Interpret coefficients as odds ratios with profile-likelihood confidence intervals.
 4. Evaluate fit and discrimination in-sample, and treat the results as associations rather than causal effects.
 
-Results and the written report are available upon request.
+The full written report is available upon request.
+
+## 📈 Key Results
+
+| Metric (in-sample, 0.5 threshold) | Value |
+|---|---|
+| AUC | 0.70 |
+| Nagelkerke R² | 0.132 |
+| Accuracy | 72.4% (baseline: 71.0%) |
+
+Main findings (associations, holding other variables constant):
+* **Lead time:** each additional day between registration and the event raises the odds of a no-show by about 2.8%.
+* **Country:** domestic (Thai) registrants have about 17.6% higher odds of a no-show than international registrants.
+* **Job:** most job groups have lower odds of a no-show than the Technical Roles reference group.
+* **Company size:** registrants from larger companies (more than 500 employees) have lower odds of a no-show.
+* **Past attendance:** returning attendees have lower odds of a no-show than first-time attendees.
 
 ## ⚠️ Limitations
 * **In-sample evaluation:** Metrics were calculated on the data used to fit the model and may be optimistic. Validation on unseen data (e.g., a hold-out set or cross-validation) is needed before practical use.
 * **Association, not causation:** The data is observational, so the findings show statistical associations, not causal effects.
 * **Limited generalizability:** The model is based on registration records from a single event. Results may differ for other organizers or event types.
 
+## ▶️ Reproducing the Analysis
+```r
+# Option A: you have data with the same structure
+#   save it as data/registrations.csv, then run:
+source("R/analysis.R")
+
+# Option B: no access to the real data
+source("R/generate_synthetic_data.R")   # creates data/synthetic_registrations.csv
+```
+
+> ⚠️ The synthetic data uses made-up, illustrative effects. It only demonstrates that the code runs. **It does not reproduce the findings in [Key Results](#-key-results).**
+
+## 📁 Repository Structure
+```
+├── R/
+│   ├── analysis.R                  # main analysis (logistic regression)
+│   └── generate_synthetic_data.R   # synthetic data for testing the code
+├── data/
+│   └── README.md                   # expected data format (real data not included)
+├── .gitignore                      # keeps proprietary data out of the repo
+└── README.md
+```
 ---
 *Developed as an senior project by Poomrat Thanapasee | Connect with me on [LinkedIn](https://www.linkedin.com/in/poomrat-thanapasee-6a99443b3/)*
