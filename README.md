@@ -22,12 +22,12 @@ Variables and their coding (column names used in the code, with the names used i
 
 | Column | Name in report | Coding |
 |---|---|---|
-| `STATUS` (target) | Status | 1 = No-show, 0 = Attended |
-| `COUNTRY` | Country | 1 = Domestic (Thai), 0 = International |
-| `JOB` | Job1–Job6 | 7 groups. In the report, six dummy variables: Job1 = Consultant / Advisor, Job2 = Executive / C-level, Job3 = Marketing & Communications, Job4 = Product Management, Job5 = Purchasing / Procurement, Job6 = Sales & Business Development. Reference group (all dummies = 0): Technical Roles |
-| `LEADTIME` | Lead Time | Days between registration date and event date (Event Date − Registration Date) |
-| `TIME_ATTEND` | Time (past attendance) | 1 = returning attendee (attended this event 2-3 times), 0 = first-time attendee |
-| `COMPANYSIZE` | Company Size | 1 = more than 500 employees, 0 = 500 or fewer |
+| `STATUS` (target) | 1 = No-show, 0 = Attended |
+| `COUNTRY` | 1 = Domestic (Thai), 0 = International |
+| `JOB` | 7 groups. In the report, six dummy variables: Job1 = Consultant / Advisor, Job2 = Executive / C-level, Job3 = Marketing & Communications, Job4 = Product Management, Job5 = Purchasing / Procurement, Job6 = Sales & Business Development. Reference group (all dummies = 0): Technical Roles |
+| `LEADTIME` | Days between registration date and event date (Event Date − Registration Date) |
+| `TIME_ATTEND` | 1 = returning attendee (attended this event 2-3 times), 0 = first-time attendee |
+| `COMPANYSIZE` | 1 = more than 500 employees, 0 = 500 or fewer |
 
 ## 🔍 Approach
 1. Define the outcome (no-show vs. attended) and the explanatory variables listed above.
