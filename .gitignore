@@ -1,0 +1,11 @@
+# Proprietary data: never commit row-level company data
+data/*
+!data/README.md
+!data/synthetic_registrations.csv
+
+# R artifacts that can contain raw data
+.Rhistory
+.RData
+.Rproj.user/
+*.rds
+*.rda
