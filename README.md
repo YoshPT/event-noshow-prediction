@@ -64,16 +64,18 @@ Main findings (associations, holding other variables constant):
 * **Limited generalizability:** The model is based on registration records from a single event. Results may differ for other organizers or event types.
 
 ## ▶️ Reproducing the Analysis
-```r
-# Option A: you have data with the same structure
-#   save it as data/registrations.csv, then run:
-source("R/analysis.R")
+The real data cannot be shared, so this repo includes a synthetic dataset generator with the same structure. In RStudio, set the working directory to the repo root and run:
 
-# Option B: no access to the real data
-source("R/generate_synthetic_data.R")   # creates data/synthetic_registrations.csv
+```r
+source("R/generate_synthetic_data.R")
 ```
 
+This creates `data/synthetic_registrations.csv` and fits the same logistic regression specification, printing the odds ratios, to show that the pipeline runs end-to-end.
+
+`Prediction_NoShow.R` is the original analysis script. It requires the proprietary dataset, so it cannot be run without it.
+
 > ⚠️ The synthetic data uses made-up, illustrative effects. It only demonstrates that the code runs. **It does not reproduce the findings in [Key Results](#-key-results).**
+
 
 ## 📁 Repository Structure
 ```
