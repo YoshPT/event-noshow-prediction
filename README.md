@@ -49,7 +49,28 @@ Metrics are calculated at a 0.5 classification threshold on the full dataset (in
 * **Targeting value:** Among registrants flagged as no-shows, 55.6% did not attend, about 1.9 times the overall no-show rate. This suggests the model can help prioritize groups for follow-up, although it captures only 23.1% of all no-shows.
 
 ## 💡 Key Findings
-Results are statistical associations, not causal effects. Exp(B) is the multiplicative change in the odds of a no-show. Occupations are compared with the reference group Technical Roles. Variables are significant at the 0.01 level except where noted.
+Results are statistical associations, not causal effects. Occupations are compared with the reference group Technical Roles.
+
+* **Lead time is by far the strongest signal:** each extra day raises the odds of a no-show by 2.8%, so registering 30 days earlier corresponds to roughly 2.3× the odds.
+* **Thai registrants** have 17.6% higher odds of a no-show than international ones.
+* **Lower odds of a no-show:** past attendees (-19.7%), larger companies (-21.8%), and five of the six occupation groups, led by Sales & Business Development (-37.5%).
+* **Consultant / Advisor** did not differ significantly from the reference group.
+
+| Factor | Exp(B) | 95% CI | Change in odds | p |
+|---|---|---|---|---|
+| Lead time (per day) | 1.028 | 1.026-1.030 | +2.8% | < 0.001 |
+| Country: Thai vs. international | 1.176 | 1.058-1.309 | +17.6% | 0.003 |
+| Past attendance: 2-3 times vs. never | 0.803 | 0.728-0.885 | -19.7% | < 0.001 |
+| Company size: >500 vs. <500 | 0.782 | 0.674-0.905 | -21.8% | 0.001 |
+| Executive / C-level | 0.725 | 0.625-0.842 | -27.5% | < 0.001 |
+| Marketing & Communications | 0.727 | 0.606-0.871 | -27.3% | 0.001 |
+| Product Management | 0.736 | 0.587-0.920 | -26.4% | 0.008 |
+| Purchasing / Procurement | 0.688 | 0.557-0.848 | -31.2% | 0.001 |
+| Sales & Business Development | 0.625 | 0.541-0.722 | -37.5% | < 0.001 |
+| Consultant / Advisor | 1.065 | 0.815-1.387 | +6.5% (not significant) | 0.641 |
+
+<details>
+<summary>Full regression output (B, S.E., Wald χ²)</summary>
 
 | Factor | B | S.E. | Wald χ² | Exp(B) | 95% CI for Exp(B) | Change in odds of no-show | p |
 |---|---|---|---|---|---|---|---|
@@ -65,6 +86,10 @@ Results are statistical associations, not causal effects. Exp(B) is the multipli
 | Company size: >500 vs. <500 employees | -0.2457 | 0.0750 | 10.738 | 0.782 | 0.674-0.905 | -21.8% | 0.001 |
 
 Model: N = 9,179, -2 Log Likelihood = 10,160.857, Cox & Snell R² = 0.092, Nagelkerke R² = 0.132. Joint Wald test for Job (df = 6): χ² = 50.43, p < 0.001.
+
+
+</details>
+
 
 * **Higher odds of a no-show:** longer lead time and Thai registrants. For lead time, the effect compounds per day: registering 30 days earlier corresponds to roughly 2.3× the odds (exp(0.0274 × 30)), assuming a linear effect on the log-odds.
 * **Lower odds of a no-show:** five of the six occupation categories, prior attendance, and larger companies. Consultant / Advisor did not differ significantly from the reference group.
