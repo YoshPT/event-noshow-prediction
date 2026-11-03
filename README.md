@@ -77,7 +77,7 @@ source("Prediction_NoShow.R")           # full analysis pipeline on the syntheti
 
 ## 📁 Repository Structure
 ```
-├── Prediction_NoShow.R             # original analysis (requires proprietary data)
+├── Prediction_NoShow.R             # main analysis (uses synthetic data if real data is absent)
 ├── R/
 │   └── generate_synthetic_data.R   # synthetic data + demo model fit
 ├── data/
