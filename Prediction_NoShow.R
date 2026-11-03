@@ -15,9 +15,9 @@ library(pROC)
 library(DescTools)
 
 # --- Step 2: Import data ---
-data=read.csv(file.choose(), head=TRUE)    # choose datalinear2.csv
-attach(data)  			   # after we "attach" the data, we can use the variable name it directly when we employ the estimation codes
-head(data) # check: STATUS, COUNTRY, TIME_ATTEND, COMPANYSIZE
+data=read.csv(file.choose(), head=TRUE)    # choose Dataset.csv
+head(data)
+table(data$TIME_ATTEND)   # sanity check: should show only 0 and 1
 
 # --- Step 3: Prepare variables ---
 # JOB is one factor; glm() creates the six dummy variables automatically.
