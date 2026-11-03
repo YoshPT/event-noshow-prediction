@@ -15,9 +15,7 @@ This is my senior project in Economics, completed during my Data Analyst co-op i
 ## 🔒 Data Availability
 The dataset (event-registration records) is **proprietary to the company** where I completed my co-op internship. Records were anonymized before analysis, and the raw data is **not published** in this repository. For the same reason, detailed results (coefficients and odds ratios) are not published either.
 
-The analysis code is in [`Prediction_NoShow.R`](Prediction_NoShow.R). When run, it asks you to select a CSV file with the columns listed below.
-
-Questions about the project? Contact me on [LinkedIn](https://www.linkedin.com/in/poomrat-thanapasee-6a99443b3/).
+The analysis code is in [`Prediction_NoShow.R`](Prediction_NoShow.R). It is shared to document the method. Since the dataset is not published, the script cannot be run as-is. If you have your own data with the columns listed below, open the script in RStudio, run it, and select your CSV file when prompted.
 
 ## 📋 Data Attributes
 Variables and their coding (column names used in the code, with the names used in the written report):
