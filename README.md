@@ -3,14 +3,14 @@
 **An exploratory study of the behavioral drivers of event no-shows**
 
 ## 🎯 Project Overview
-This is my senior project in Economics, completed during my Data Analyst co-op internship at Eventthai Co., Ltd. applying Logistic Regression, an econometric approach, to identify the factors associated with event no-shows. The goal is to provide statistical evidence that can inform future features for event management platforms, such as risk-based reminders. The findings and recommendations were documented in a written report.
+This is my senior project in Economics, completed during my Data Analyst co-op internship at Eventthai Co., Ltd. It applies Logistic Regression, an econometric approach, to identify the factors associated with event no-shows. The goal is to provide statistical evidence that can inform future features for event management platforms, such as risk-based reminders. The findings and recommendations were documented in a written report.
 
 ## 🛠️ Technical Stack & Methodology
 * **Language:** R (RStudio)
 * **Model:** Binary Logistic Regression (target: no-show)
 * **Model Fit:** Nagelkerke R² of 0.132, AUC of 0.70 (see Model Performance)
 * **Inference:** p-values, Wald Chi-Square, and odds ratios (Exp(B)) with 95% profile-likelihood confidence intervals
-* **Diagnostics:** Multicollinearity check using Variance Inflation Factor (VIF). Generalized VIF is used because Job has six dummy variables; all GVIF^(1/(2*Df)) values are at most 1.04, well below 2.24 (the equivalent of VIF < 5), so multicollinearity is not a concern
+* **Diagnostics:** Generalized VIF (Job has six dummy variables). All GVIF^(1/(2·Df)) values are at most 1.04, below the 2.24 threshold (equivalent to VIF < 5), so multicollinearity is not a concern.
 
 ## 📋 Data Attributes
 The analysis is based on 9,179 anonymized registration records. Variables and their coding:
@@ -20,14 +20,14 @@ The analysis is based on 9,179 anonymized registration records. Variables and th
 | `Status` (Target) | 1 = No-show, 0 = Attended |
 | `Country` | 1 = Domestic (Thai), 0 = International |
 | `Job` | Six dummy variables: Job1 = Consultant / Advisor, Job2 = Executive / C-level, Job3 = Marketing & Communications, Job4 = Product Management, Job5 = Purchasing / Procurement, Job6 = Sales & Business Development. Reference group (all dummies = 0): Technical Roles |
-| `Lead Time` | The time duration between registration date and event date (Event Date - Registration Date). |
-| `Time` | Past attendance of this event: 1 = attended 2-3 times, 0 = never attended |
-| `Company Size` | 1 = more than 500 employees, 0 = fewer than 500 employees |
+| `Lead Time` | Days between registration date and event date (Event Date − Registration Date) |
+| `Time` (past attendance) | 1 = returning attendee (2-3 times), 0 = first-time attendee |
+| `Company Size` | 1 = more than 500 employees, 0 = 500 or fewer |
 
 > 🔒 **Data Privacy Note:**
 > The dataset used in this analysis is proprietary to the company. To comply with data privacy and confidentiality policies, the original data file has not been uploaded to this public repository. However, the R scripts, methodologies, and statistical outputs are fully documented to demonstrate the analytical process.
 
-## 🎯 Model Performance
+## 📈 Model Performance
 Metrics are calculated at a 0.5 classification threshold on the full dataset (in-sample).
 
 | Metric | Value |
@@ -51,17 +51,17 @@ Metrics are calculated at a 0.5 classification threshold on the full dataset (in
 ## 💡 Key Findings
 Results are statistical associations, not causal effects. Occupations are compared with the reference group Technical Roles.
 
-* **Lead time is by far the strongest signal:** each extra day raises the odds of a no-show by 2.8%, so registering 30 days earlier corresponds to roughly 2.3× the odds.
+* **Lead time is the most statistically significant factor** (Wald χ² = 763.6): each extra day raises the odds of a no-show by 2.8%, so registering 30 days earlier corresponds to roughly 2.3× the odds (exp(0.0274 × 30)), assuming a linear effect on the log-odds.
 * **Thai registrants** have 17.6% higher odds of a no-show than international ones.
-* **Lower odds of a no-show:** past attendees (-19.7%), larger companies (-21.8%), and five of the six occupation groups, led by Sales & Business Development (-37.5%).
+* **Lower odds of a no-show:** returning attendees (2-3 times, -19.7%), larger companies (-21.8%), and five of the six occupation groups, led by Sales & Business Development (-37.5%).
 * **Consultant / Advisor** did not differ significantly from the reference group.
 
 | Factor | Exp(B) | 95% CI | Change in odds | p |
 |---|---|---|---|---|
 | Lead time (per day) | 1.028 | 1.026-1.030 | +2.8% | < 0.001 |
 | Country: Thai vs. international | 1.176 | 1.058-1.309 | +17.6% | 0.003 |
-| Past attendance: 2-3 times vs. never | 0.803 | 0.728-0.885 | -19.7% | < 0.001 |
-| Company size: >500 vs. <500 | 0.782 | 0.674-0.905 | -21.8% | 0.001 |
+| Past attendance: 2-3 times vs. first-time | 0.803 | 0.728-0.885 | -19.7% | < 0.001 |
+| Company size: >500 vs. 500 or fewer | 0.782 | 0.674-0.905 | -21.8% | 0.001 |
 | Executive / C-level | 0.725 | 0.625-0.842 | -27.5% | < 0.001 |
 | Marketing & Communications | 0.727 | 0.606-0.871 | -27.3% | 0.001 |
 | Product Management | 0.736 | 0.587-0.920 | -26.4% | 0.008 |
@@ -82,17 +82,13 @@ Results are statistical associations, not causal effects. Occupations are compar
 | Occupation: Purchasing / Procurement (Job5) | -0.3737 | 0.1075 | 12.086 | 0.688 | 0.557-0.848 | -31.2% | 0.001 |
 | Occupation: Sales & Business Development (Job6) | -0.4696 | 0.0734 | 40.906 | 0.625 | 0.541-0.722 | -37.5% | < 0.001 |
 | Lead time (per additional day) | 0.0274 | 0.0010 | 763.562 | 1.028 | 1.026-1.030 | +2.8% | < 0.001 |
-| Past attendance: 2-3 times vs. never | -0.2197 | 0.0499 | 19.386 | 0.803 | 0.728-0.885 | -19.7% | < 0.001 |
-| Company size: >500 vs. <500 employees | -0.2457 | 0.0750 | 10.738 | 0.782 | 0.674-0.905 | -21.8% | 0.001 |
+| Past attendance: 2-3 times vs. first-time | -0.2197 | 0.0499 | 19.386 | 0.803 | 0.728-0.885 | -19.7% | < 0.001 |
+| Company size: >500 vs. 500 or fewer | -0.2457 | 0.0750 | 10.738 | 0.782 | 0.674-0.905 | -21.8% | 0.001 |
 
 Model: N = 9,179, -2 Log Likelihood = 10,160.857, Cox & Snell R² = 0.092, Nagelkerke R² = 0.132. Joint Wald test for Job (df = 6): χ² = 50.43, p < 0.001.
 
 
 </details>
-
-
-* **Higher odds of a no-show:** longer lead time and Thai registrants. For lead time, the effect compounds per day: registering 30 days earlier corresponds to roughly 2.3× the odds (exp(0.0274 × 30)), assuming a linear effect on the log-odds.
-* **Lower odds of a no-show:** five of the six occupation categories, prior attendance, and larger companies. Consultant / Advisor did not differ significantly from the reference group.
 
 ## 🚀 Proposed Business Use Cases
 Based on these findings, the following ideas are proposed for future platform development:
