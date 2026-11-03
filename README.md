@@ -23,7 +23,7 @@ To make the work verifiable without the raw data, this repo provides:
 
 Questions about the data? Contact me on [LinkedIn](https://www.linkedin.com/in/poomrat-thanapasee-6a99443b3/).
 
-## 📋 Data dictionary
+## 📋 Data Dictionary
 Variables and their coding (column names used in the code, with the names used in the written report):
 
 | Column | Name in report | Coding |
