@@ -3,7 +3,7 @@
 **An exploratory study of the behavioral drivers of event no-shows**
 
 ## 🎯 Project Overview
-This is my senior project in Economics, completed during my Data Analyst co-op internship at Eventthai Co., Ltd. It applies Logistic Regression, an econometric approach, to identify the factors associated with event no-shows. The goal is to provide statistical evidence that can inform future features for event management platforms, such as risk-based reminders. The findings and recommendations were documented in a written report.
+This is my senior project in Economics, completed during my Data Analyst co-op internship at a Thai event-industry company. It applies Logistic Regression, an econometric approach, to identify the factors associated with event no-shows. The goal is to provide statistical evidence that can inform future features for event management platforms, such as risk-based reminders. The findings and recommendations were documented in a written report.
 
 ## 🛠️ Technical Stack & Methodology
 * **Language:** R (RStudio)
